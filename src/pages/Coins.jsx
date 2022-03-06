@@ -105,6 +105,7 @@ const Coins = () => {
 
   useEffect(() => {
     fetchCoin();
+    // eslint-disable-next-line
   }, [id]);
 
   const handleAddToWatchlist = async () => {

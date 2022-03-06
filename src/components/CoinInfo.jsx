@@ -64,6 +64,7 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [currency, days]);
 
   return (

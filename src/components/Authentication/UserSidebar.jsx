@@ -3,7 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
-import { Avatar, Box } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import { CoinsState } from "../../context/CoinsProvider";
 import { signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
@@ -61,7 +61,6 @@ const useStyles = makeStyles({
     //flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    color: "white",
     width: "96%",
     padding: 10,
     margin: 5,
@@ -143,7 +142,7 @@ export default function UserSidebar() {
               height: 38,
               width: 38,
               marginLeft: 5,
-              backgroundColor: "gold !important",
+              backgroundColor: "gold",
               cursor: "pointer",
             }}
             src={user.photoURL}
@@ -167,35 +166,35 @@ export default function UserSidebar() {
               </div>
               <div className={classes.watchlist} style={{ fontSize: 15 }}>
                 <span style={{ marginBottom: 10 }}>watch list</span>
-                {coins.map((coin) => {
-                  if (watchlist.includes(coin.id)) {
-                    return (
-                      <div className={classes.list}>
-                        <span
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            navigate(`/coins/${coin.id}`);
+                {coins.map((coin) =>
+                  watchlist.includes(coin.id) ? (
+                    <div className={classes.list}>
+                      <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          navigate(`/coins/${coin.id}`);
+                        }}
+                      >
+                        {coin.name}
+                      </span>
+                      <span style={{ display: "flex", alignItems: "center" }}>
+                        {symbol}
+                        {coin.current_price.toFixed(2)}
+                        <DeleteIcon
+                          onClick={() => handleRemoveFromWatchlist(coin)}
+                          style={{
+                            height: 18,
+                            marginLeft: 5,
+                            color: "black",
+                            cursor: "pointer",
                           }}
-                        >
-                          {coin.name}
-                        </span>
-                        <span style={{ display: "flex", alignItems: "center" }}>
-                          {symbol}
-                          {coin.current_price.toFixed(2)}
-                          <DeleteIcon
-                            onClick={() => handleRemoveFromWatchlist(coin)}
-                            style={{
-                              height: 18,
-                              marginLeft: 5,
-                              color: "black",
-                              cursor: "pointer",
-                            }}
-                          />
-                        </span>
-                      </div>
-                    );
-                  }
-                })}
+                        />
+                      </span>
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                )}
               </div>
               <Button
                 variant="contained"

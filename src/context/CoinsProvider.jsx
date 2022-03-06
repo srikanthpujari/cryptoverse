@@ -55,7 +55,7 @@ const CoinsProvider = ({ children }) => {
 
       return () => unsubscribe();
     }
-  }, user);
+  }, [user]);
 
   useEffect(() => {
     switch (currency) {
