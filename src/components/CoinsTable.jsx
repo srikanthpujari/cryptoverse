@@ -15,7 +15,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CoinsState } from "../context/CoinsProvider";
@@ -37,28 +36,12 @@ const useStyles = makeStyles({
 const CoinsTable = () => {
   const classes = useStyles();
 
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { currency, symbol } = CoinsState();
+  const { currency, symbol, coins, loading, fetchCoins } = CoinsState();
 
   const navigate = useNavigate();
-
-  const fetchCoins = async () => {
-    try {
-      setLoading(true);
-      const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-      );
-
-      setCoins(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     fetchCoins();

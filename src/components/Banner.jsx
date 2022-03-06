@@ -42,7 +42,7 @@ const Banner = () => {
             variant="subtitle2"
             style={{ color: "gray", textTransform: "capitalize" }}
           >
-            One place for all your favorite currencies...
+            One place for all your favorite currencies....
           </Typography>
         </div>
         <Carousel />

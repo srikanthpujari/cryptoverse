@@ -1,6 +1,6 @@
-import { makeStyles, LinearProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
 import { CoinsState } from "../context/CoinsProvider";
@@ -35,7 +35,7 @@ const Carousel = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchTrendingCoins();
   }, [currency]);
 
